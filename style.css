@@ -121,12 +121,13 @@ img {
   opacity: 0.85;
 }
 
-.logo-img {
-  height: 42px;
-  width: auto;
-  object-fit: contain;
-  margin-bottom: 0.05rem;
-  align-self: flex-start;
+.logo-title {
+  font-size: 1.55rem;
+  line-height: 1.1;
+  color: var(--color-primary-dark);
+  letter-spacing: 0.08rem;
+  font-weight: 800;
+  margin-bottom: 0.1rem;
 }
 
 .logo-sub {
