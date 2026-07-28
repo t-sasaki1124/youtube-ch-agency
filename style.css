@@ -114,19 +114,33 @@ img {
 .logo-area {
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+}
+
+.logo-area:hover {
+  opacity: 0.85;
 }
 
 .logo-title {
-  font-size: 1.6rem;
-  line-height: 1.2;
+  font-size: 1.5rem;
+  line-height: 1.1;
   color: var(--color-primary-dark);
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.08rem;
+  font-weight: 800;
 }
 
 .logo-sub {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
+  color: var(--color-gold);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.logo-desc {
+  font-size: 0.55rem;
   color: var(--color-text-muted);
   font-weight: 500;
+  line-height: 1.2;
 }
 
 .header-nav {
