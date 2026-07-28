@@ -903,6 +903,7 @@ img {
 .line-add-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.6rem;
   background-color: var(--color-line);
   color: var(--color-white);
@@ -911,6 +912,7 @@ img {
   font-weight: 700;
   margin-top: 0.8rem;
   font-size: 0.95rem;
+  width: 100%;
   max-width: 280px;
 }
 
@@ -1059,6 +1061,21 @@ img {
     flex-direction: column;
     align-items: stretch; /* Reset to stretch for full mobile width */
     padding: 2.5rem 1.5rem;
+  }
+
+  .contact-info-side {
+    text-align: center;
+  }
+
+  .method-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .method-text {
+    align-items: center;
   }
 
   .contact-form-side {
