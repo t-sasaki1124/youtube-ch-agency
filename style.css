@@ -122,10 +122,10 @@ img {
 }
 
 .logo-img {
-  height: 36px;
+  height: 42px;
   width: auto;
   object-fit: contain;
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.05rem;
   align-self: flex-start;
 }
 
