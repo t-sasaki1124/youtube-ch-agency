@@ -1,6 +1,8 @@
 // Custom JavaScript for "Poco a Poco" YouTube Agency LP
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Remove no-js class to enable scroll animations
+  document.body.classList.remove('no-js');
   
   // 1. FAQ Accordion Interaction
   const faqQuestions = document.querySelectorAll('.faq-question');
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 2. Contact Form Submission Simulation
+  // 2. Contact Form Submission with FormSubmit
   const inquiryForm = document.getElementById('inquiry-form');
   const successMessage = document.getElementById('form-success-message');
   
@@ -38,27 +40,53 @@ document.addEventListener('DOMContentLoaded', () => {
     inquiryForm.addEventListener('submit', (event) => {
       event.preventDefault(); // Stop page reload
       
-      // Fetch input values for validation/feedback
+      const submitButton = inquiryForm.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton.innerText;
+      submitButton.disabled = true;
+      submitButton.innerText = '送信しています...';
+
+      // Fetch input values for submission
       const name = document.getElementById('name').value;
       const contactinfo = document.getElementById('contactinfo').value;
       const message = document.getElementById('message').value;
       
-      // Simple feedback simulation
       if (name && contactinfo && message) {
-        // Hide the form
-        inquiryForm.style.display = 'none';
-        
-        // Show the success message
-        successMessage.style.display = 'flex';
-        
-        // Scroll to success message smoothly
-        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-        console.log('Form submitted successfully:', {
-          name,
-          contactinfo,
-          message
+        // Send actual email via FormSubmit AJAX API to user email
+        fetch("https://formsubmit.co/ajax/contact.tsc2026@gmail.com", {
+          method: "POST",
+          headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            "お名前": name,
+            "ご連絡先": contactinfo,
+            "ご相談内容": message
+          })
+        })
+        .then(response => {
+          if (response.ok) {
+            // Hide the form
+            inquiryForm.style.display = 'none';
+            // Show the success message
+            successMessage.style.display = 'flex';
+            // Scroll to success message smoothly
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            alert('送信に失敗しました。恐れ入りますが、LINEからお問い合わせいただくか、時間をおいて再度お試しください。');
+            submitButton.disabled = false;
+            submitButton.innerText = originalButtonText;
+          }
+        })
+        .catch(error => {
+          console.error('Error submitting form:', error);
+          alert('通信エラーが発生しました。インターネット接続を確認いただくか、LINEからお問い合わせください。');
+          submitButton.disabled = false;
+          submitButton.innerText = originalButtonText;
         });
+      } else {
+        submitButton.disabled = false;
+        submitButton.innerText = originalButtonText;
       }
     });
   }
@@ -74,5 +102,23 @@ document.addEventListener('DOMContentLoaded', () => {
       header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
     }
   });
+
+  // 4. Scroll Reveal Animation (techbiz style)
+  const revealElements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-active');
+        // Once revealed, no need to track it anymore
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: '0px 0px -5% 0px', // Trigger slightly before element enters full view
+    threshold: 0.02 // Extremely low threshold so large mobile cards animate instantly
+  });
+
+  revealElements.forEach(el => observer.observe(el));
 
 });

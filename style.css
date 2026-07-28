@@ -1,15 +1,15 @@
-/* Custom Elegant CSS for "ポコア工房" YouTube Agency LP */
+/* Custom Elegant CSS for "Poco a Poco" YouTube Agency LP */
 
 /* CSS Variables for Premium Design Tokens */
 :root {
-  --color-primary-dark: #0f172a;  /* Slate 900 - Elegant deep navy */
+  --color-primary-dark: #0a192f;  /* Deep midnight navy - Modern and trustful */
   --color-primary-light: #f8fafc; /* Slate 50 - Creamy clean white */
-  --color-gold: #c5a028;          /* Antique Gold */
-  --color-gold-hover: #b4901f;
-  --color-gold-light: #fef9c3;    /* Light gold highlight */
+  --color-gold: #dfba6b;          /* Bright Champagne Gold - Soft and premium */
+  --color-gold-hover: #cfac5a;
+  --color-gold-light: #faf5e8;    /* Very soft warm gold tint */
   --color-line: #06c755;          /* LINE brand color */
   --color-line-hover: #05b04b;
-  --color-text-dark: #1e293b;     /* High contrast charcoal */
+  --color-text-dark: #0f172a;     /* Deep slate for high legibility */
   --color-text-muted: #475569;   /* Slate 600 */
   --color-white: #ffffff;
   --color-border: #e2e8f0;
@@ -31,6 +31,10 @@ html {
   font-size: 18px; /* High legibility baseline for seniors */
 }
 
+section {
+  scroll-margin-top: 80px; /* Fixed header offset */
+}
+
 body {
   font-family: var(--font-sans);
   color: var(--color-text-dark);
@@ -43,12 +47,16 @@ h1, h2, h3, h4, .logo-title {
   font-family: var(--font-serif);
   font-weight: 700;
   color: var(--color-primary-dark);
+  letter-spacing: 0.12rem;
+  line-height: 1.5;
+  line-break: strict;
+  overflow-wrap: break-word;
 }
 
 a {
   color: var(--color-gold);
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 img {
@@ -493,14 +501,16 @@ img {
   font-size: 0.95rem;
   font-weight: 600;
   margin-bottom: 0.8rem;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
   color: var(--color-text-dark);
+  line-height: 1.6;
+  text-indent: -1em;
+  padding-left: 1em;
 }
 
 .feature-bullets li i {
   color: var(--color-gold);
+  margin-top: 0.25rem;
+  flex-shrink: 0;
 }
 
 /* Flow Section */
@@ -714,19 +724,23 @@ img {
 .plan-body li {
   font-size: 0.95rem;
   margin-bottom: 0.9rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.8rem;
   color: var(--color-text-dark);
+  line-height: 1.6;
+  text-indent: -1em;
+  padding-left: 1em;
 }
 
 .plan-body li i {
   color: var(--color-gold);
-  margin-top: 0.2rem;
+  margin-top: 0.25rem;
+  flex-shrink: 0;
 }
 
-.pricing-card.popular .plan-body li i {
-  color: var(--color-gold);
+.list-text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 
 /* Tooltip and Info explanation style */
@@ -812,6 +826,7 @@ img {
 
 .contact-box {
   display: flex;
+  align-items: flex-start; /* Align left info and right form top elements on desktop */
   gap: 4rem;
   background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -914,6 +929,7 @@ img {
 
 .contact-form-side h3 {
   font-size: 1.3rem;
+  margin-top: 0.5rem; /* Better balance and spacing with desktop box top edge */
   margin-bottom: 2rem;
   border-bottom: 2px solid var(--color-primary-light);
   padding-bottom: 0.8rem;
@@ -934,6 +950,14 @@ img {
 .form-group label {
   font-size: 0.85rem;
   font-weight: 700;
+}
+
+.form-group label .label-sub {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-top: 0.15rem;
 }
 
 .form-group label .required {
@@ -1033,6 +1057,7 @@ img {
 
   .contact-box {
     flex-direction: column;
+    align-items: stretch; /* Reset to stretch for full mobile width */
     padding: 2.5rem 1.5rem;
   }
 
@@ -1076,4 +1101,53 @@ img {
   .section-title {
     font-size: 1.8rem;
   }
+  
+  .pricing-card {
+    padding: 2.2rem 1.4rem; /* Reduce card padding on mobile to optimize width */
+  }
+
+  .flow-card {
+    padding: 2rem 1.2rem;
+  }
+}
+
+/* 1文字改行の防止と日本語の文字組最適化 */
+.btn-maintext, 
+.line-add-btn, 
+.pricing-card h3, 
+.plan-type-header h3,
+.flow-card h3,
+.pain-card h3 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* PC専用の改行設定（スマホでは非表示にして流し込む） */
+@media (max-width: 768px) {
+  .pc-only {
+    display: none !important;
+  }
+}
+
+/* techbiz風 ふわっと浮かび上がるアニメーション（JS有効時のみ初期非表示） */
+body:not(.no-js) .reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  filter: blur(2px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
+}
+
+body:not(.no-js) .reveal.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* 改行防止クラス */
+.nobr {
+  display: inline-block;
+  white-space: nowrap;
 }
