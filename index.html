@@ -27,7 +27,7 @@
         <span class="logo-sub">動画編集部</span>
         <span class="logo-desc">シニアのための家族向けYouTube投稿代行サービス</span>
       </a>
-      <nav class="header-nav">
+      <nav class="header-nav" id="header-nav">
         <a href="#features" class="nav-link">特徴</a>
         <a href="#flow" class="nav-link">ご利用の流れ</a>
         <a href="#pricing" class="nav-link">料金プラン</a>
@@ -38,8 +38,25 @@
           <i class="fa-brands fa-line"></i> LINEで無料相談
         </a>
       </div>
+      <button class="hamburger" id="hamburger-btn" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <div class="mobile-nav-header">
+      <span class="logo-title">Poco a Poco</span>
+      <button class="mobile-nav-close" id="mobile-nav-close" aria-label="メニューを閉じる"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <a href="#features" class="mobile-nav-link">特徴</a>
+    <a href="#flow" class="mobile-nav-link">ご利用の流れ</a>
+    <a href="#pricing" class="mobile-nav-link">料金プラン</a>
+    <a href="#faq" class="mobile-nav-link">よくある質問</a>
+    <a href="#contact" class="mobile-nav-link mobile-nav-cta"><i class="fa-brands fa-line"></i> LINEで無料相談</a>
+  </nav>
 
   <!-- Hero Section -->
   <section class="hero-section">

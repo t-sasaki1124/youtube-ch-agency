@@ -121,4 +121,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
   revealElements.forEach(el => observer.observe(el));
 
+  // 5. Hamburger / Mobile Navigation Drawer
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const mobileNav    = document.getElementById('mobile-nav');
+  const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+  const mobileNavClose   = document.getElementById('mobile-nav-close');
+  const mobileNavLinks   = document.querySelectorAll('.mobile-nav-link');
+
+  function openMobileNav() {
+    mobileNav.classList.add('is-open');
+    mobileNavOverlay.style.display = 'block';
+    // small delay to allow display:block to take effect before opacity transition
+    requestAnimationFrame(() => mobileNavOverlay.classList.add('is-open'));
+    hamburgerBtn.classList.add('is-open');
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
+    mobileNav.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileNav() {
+    mobileNav.classList.remove('is-open');
+    mobileNavOverlay.classList.remove('is-open');
+    hamburgerBtn.classList.remove('is-open');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+    mobileNav.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    // Hide overlay after transition
+    mobileNavOverlay.addEventListener('transitionend', () => {
+      if (!mobileNavOverlay.classList.contains('is-open')) {
+        mobileNavOverlay.style.display = 'none';
+      }
+    }, { once: true });
+  }
+
+  if (hamburgerBtn) {
+    hamburgerBtn.addEventListener('click', () => {
+      mobileNav.classList.contains('is-open') ? closeMobileNav() : openMobileNav();
+    });
+  }
+
+  if (mobileNavClose)    mobileNavClose.addEventListener('click', closeMobileNav);
+  if (mobileNavOverlay)  mobileNavOverlay.addEventListener('click', closeMobileNav);
+
+  // Close drawer when a nav link is clicked
+  mobileNavLinks.forEach(link => link.addEventListener('click', closeMobileNav));
+
+  // Close drawer when resized to desktop width
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 992 && mobileNav.classList.contains('is-open')) {
+      closeMobileNav();
+    }
+  });
+
 });
